@@ -1,11 +1,25 @@
 package api.mock;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import java.io.IOException;
+import java.util.ArrayList;
 
+import api.mock.API.DatamuseAPI;
+import api.mock.Controller.GetSpelledSimilarlyWordsController;
+
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        GetSpelledSimilarlyWordsController controller = new GetSpelledSimilarlyWordsController(new DatamuseAPI());
+
+        try {
+            ArrayList<String> results = controller.get("apple");
+
+            for (String result : results) {
+                System.out.println(result);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
